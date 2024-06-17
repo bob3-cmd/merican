@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="yes">yes</button>
+    <button id="no">no</button>
+    <style>
+        body {
+            background-color: rgb(71, 71, 255);
+        }
+        #yes {
+            background-color:white;
+            width: 45vw;
+            height: 95vh;
+            border-radius: 15px;
+            border: transparent;
+            font-size: 200px;
+            font-family: "Playwrite IS", cursive;
+
+        }
+        #yes:hover {
+            background-color: rgb(221, 221, 221);
+        }
+        #no {
+            background-color:white;
+            width: 45vw;
+            height: 95vh;
+            border-radius: 15px;
+            border: transparent;
+            font-size: 200px;
+            font-family: "Playwrite IS", cursive;
+            position: absolute;
+            left: 50vw;
+
+        }
+        #no:hover {
+            background-color: rgb(221, 221, 221);
+        }
+    </style>
+    <script>
+        const socket = io();
+        document.querySelectorAll("button").forEach(b => {
+            b.onclick =() => {
+                document.querySelectorAll("button").forEach(b => {
+                    b.readOnly = true;
+        })
+                socket.emit("ready")
+                window.location.href = "index.html";
+            }
+        })
+    </script>
+</body>
+</html>

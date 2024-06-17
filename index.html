@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is It American?</title>
+</head>
+<body>
+    <h1>Look up at the host's screen.</h1>
+    <style>
+        body{
+            background-color: rgb(71, 71, 255);
+        }
+        h1{
+            color: white;
+            position: absolute;
+                left: 40vw;
+            top: 48vh;
+        }
+    </style>
+    <script>
+        const socket = io();
+        socket.on("begin", ()=> {
+            window.location.href="tralse.html";
+        })
+    </script>
+</body>
+</html>

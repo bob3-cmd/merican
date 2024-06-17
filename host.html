@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Host screen</title>
+</head>
+<body>
+    <h1 id="yes">Is It American?</h1>
+    <h1 id="merica"></h1>
+    <audio src="dingding.mp3" id="ding"></audio>
+    <style>
+        body {
+            background-color: rgb(71, 71, 255);
+
+        }
+        #yes {
+            font-family: "Playwrite IS", cursive;
+            font-size: 60px;
+            position: absolute;
+            left: 40vw;
+            color: white;
+        }
+        #merica {
+            font-family: 'Courier New', Courier, monospace;
+            color: white;
+            font-size: 160px;
+            font-weight: 5px;
+            position: absolute;
+            top: 60px;
+            left: 40vw;
+        }
+    </style>
+    <script>
+        const socket = io();
+        socket.emit("host");
+        document.addEventListener("DOMContentLoaded", () => {
+            const stereo = [
+                'tea',
+                '',
+                'no',
+                '',
+                'iced frappicino',
+                '',
+                'yes',
+                '',
+                'sandwich',
+                '',
+                'no',
+                '',
+                'wendys cube (A cheeseburger with a pound of meat.)',
+                '',
+                'yes',
+                '',
+                'Pizza',
+                '',
+                'no',
+                '',
+                'A 5 inch tall pizza (otherwise known as deep dish pizza)',
+                '',
+                'yes',
+                '',
+                'A country so bad that there is an organization called make this country great again, which is filled with bad people',
+                '',
+                'yes',
+                '',
+                'A country where people are proud to be black but not to be white.',
+                '',
+                'yes',
+                '',
+                'No hipocracy here!',
+                '',
+                'no',
+                ''];
+
+            let index = 0;
+            let showItem = true;
+
+            document.body.addEventListener("click", () => {
+                console.log("Body clicked");
+            if( (index) % 4 === 0) {
+                if (showItem) {
+                    console.log("Showing item:", stereo[index]);
+                    document.getElementById("merica").innerHTML = stereo[index];
+                    socket.emit("start")
+                    index = (index + 1)
+                } else {
+                    console.log("Clearing item");
+                    document.getElementById("merica").innerHTML = "";
+                }
+            } else {
+                if (showItem) {
+                    console.log("Showing item:", stereo[index]);
+                    document.getElementById("merica").innerHTML = stereo[index];
+                    index = (index + 1)
+                } else {
+                    console.log("Clearing item");
+                    document.getElementById("merica").innerHTML = "";
+                }
+            }
+            console.log(index)
+            });
+        });
+        socket.on("turn", ()=> {
+            document.getElementById("ding").play()
+        })
+        
+    </script>
+</body>
+</html>
